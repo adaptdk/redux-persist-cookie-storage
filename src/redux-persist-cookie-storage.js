@@ -22,6 +22,8 @@ function CookieStorage(options) {
       this.cookies = new FakeCookieJar(options.cookies);
     }
   }
+  
+  this.path = options.path || false;
 }
 
 CookieStorage.prototype.getItem = function (key, callback) {
@@ -37,6 +39,10 @@ CookieStorage.prototype.setItem = function (key, value, callback) {
   }
   if (expires) {
     options["expires"] = expires;
+  }
+  
+  if (this.path) {
+    options["path"] = this.path;
   }
 
   this.cookies.set(this.keyPrefix + key, value, options);
