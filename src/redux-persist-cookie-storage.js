@@ -24,6 +24,7 @@ function CookieStorage(options) {
   }
   
   this.path = options.path || false;
+  this.domain = options.domain || false;
 }
 
 CookieStorage.prototype.getItem = function (key, callback) {
@@ -43,6 +44,10 @@ CookieStorage.prototype.setItem = function (key, value, callback) {
   
   if (this.path) {
     options["path"] = this.path;
+  }
+  
+  if (this.domain) {
+    options["domain"] = this.domain;
   }
 
   this.cookies.set(this.keyPrefix + key, value, options);
